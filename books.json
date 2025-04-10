@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 2,
+    "title": "1984",
+    "author": "George Orwell",
+    "isBorrowed": true,
+    "borrower": "John Smith",
+    "borrowDate": "2024-03-15T10:30:00Z"
+  },
+  {
+    "id": 3,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 4,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "isBorrowed": true,
+    "borrower": "Emily Johnson",
+    "borrowDate": "2024-03-20T14:15:00Z"
+  },
+  {
+    "id": 5,
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 6,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 7,
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "isBorrowed": true,
+    "borrower": "Michael Brown",
+    "borrowDate": "2024-03-18T09:45:00Z"
+  },
+  {
+    "id": 8,
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 9,
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 10,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "isBorrowed": true,
+    "borrower": "Sarah Wilson",
+    "borrowDate": "2024-03-22T11:20:00Z"
+  },
+  {
+    "id": 1743704140710,
+    "title": "famous five",
+    "author": "enid blyton",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 1743704477090,
+    "title": "SECRET SEVEN",
+    "author": "enid blyton",
+    "isBorrowed": false,
+    "borrower": null,
+    "borrowDate": null
+  },
+  {
+    "id": 1743733523433,
+    "title": "PRISONER OF AZKABAN",
+    "author": "JK ROWLING",
+    "isBorrowed": true,
+    "borrower": "Current User",
+    "borrowDate": "2025-04-10T15:16:19.025Z"
+  }
+]

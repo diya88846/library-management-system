@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Book Bank Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <header>
+                <h1><i class="fas fa-book"></i> Book Bank Management</h1>
+                <p class="subtitle">Please login or sign up to continue</p>
+            </header>
+
+            <div class="auth-toggle">
+                <button id="login-toggle" class="toggle-btn active" onclick="toggleAuth('login')">Login</button>
+                <button id="signup-toggle" class="toggle-btn" onclick="toggleAuth('signup')">Sign Up</button>
+            </div>
+
+            <div class="auth-container">
+                <div class="auth-box">
+                    <h2>Welcome</h2>
+                    <div id="user-info" style="display: none;">
+                        <p>Logged in as: <span id="username-display"></span></p>
+                        <p>Role: <span id="user-role-display"></span></p>
+                    </div>
+                    <div id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="username"><i class="fas fa-user"></i> Username</label>
+                            <input type="text" id="username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><i class="fas fa-lock"></i> Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                        <button onclick="login()" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <div id="signup-form" class="auth-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="new-username"><i class="fas fa-user"></i> Username</label>
+                            <input type="text" id="new-username" placeholder="Choose a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password"><i class="fas fa-lock"></i> Password</label>
+                            <input type="password" id="new-password" placeholder="Choose a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                            <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-role"><i class="fas fa-user-tag"></i> Select Role</label>
+                            <select id="user-role" required>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button onclick="signup()" class="signup-btn">
+                            <i class="fas fa-user-plus"></i> Sign Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html> 

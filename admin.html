@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Admin Dashboard</h1>
+        <div>
+            <span id="admin-name"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="dashboard-header">
+            <h2>Welcome to Admin Dashboard</h2>
+            <p>Manage your application from here</p>
+        </div>
+
+        <div class="dashboard-cards">
+            <div class="card" onclick="showSection('users')">
+                <h3>Users</h3>
+                <p>Total users: <span id="total-users">0</span></p>
+            </div>
+            <div class="card" onclick="showSection('books')">
+                <h3>Books</h3>
+                <p>Total books: <span id="total-books">0</span></p>
+            </div>
+            <div class="card">
+                <h3>Analytics</h3>
+                <p>View system analytics and reports</p>
+            </div>
+        </div>
+
+        <div class="section-tabs">
+            <button class="section-tab" onclick="showSection('users')">Users</button>
+            <button class="section-tab" onclick="showSection('books')">Books</button>
+        </div>
+
+        <div class="users-section" id="users-section">
+            <h3>User Management</h3>
+            <input type="text" class="search-box" id="user-search" placeholder="Search users..." onkeyup="searchUsers()">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="users-table-body">
+                    <!-- Users will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="books-section" id="books-section" style="display: none;">
+            <h3>Book Management</h3>
+            
+            <div class="import-section">
+                <h4>Import Books</h4>
+                <div class="add-book-form">
+                    <input type="text" id="search-query" placeholder="Search books to import...">
+                    <button onclick="searchOpenLibrary()">Search</button>
+                    <button onclick="importSelectedBooks()">Import Selected</button>
+                </div>
+                <div id="import-progress">Importing books...</div>
+                <div id="import-results" class="import-results">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+
+            <div class="add-book-form">
+                <input type="text" id="book-title" placeholder="Book Title">
+                <input type="text" id="book-author" placeholder="Author">
+                <input type="text" id="book-isbn" placeholder="ISBN">
+                <button onclick="addBook()">Add Book</button>
+            </div>
+            <input type="text" class="search-box" id="book-search" placeholder="Search books..." onkeyup="searchBooks()">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN</th>
+                        <th>Status</th>
+                        <th>Borrower</th>
+                        <th>Borrow Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="books-table-body">
+                    <!-- Books will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html> 

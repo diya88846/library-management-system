@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "bookId": 2,
+    "bookTitle": "1984",
+    "username": "John Smith",
+    "action": "borrow",
+    "date": "2024-03-15T10:30:00Z"
+  },
+  {
+    "id": 2,
+    "bookId": 4,
+    "bookTitle": "Pride and Prejudice",
+    "username": "Emily Johnson",
+    "action": "borrow",
+    "date": "2024-03-20T14:15:00Z"
+  },
+  {
+    "id": 3,
+    "bookId": 7,
+    "bookTitle": "Brave New World",
+    "username": "Michael Brown",
+    "action": "borrow",
+    "date": "2024-03-18T09:45:00Z"
+  },
+  {
+    "id": 4,
+    "bookId": 10,
+    "bookTitle": "The Alchemist",
+    "username": "Sarah Wilson",
+    "action": "borrow",
+    "date": "2024-03-22T11:20:00Z"
+  }
+] 
