@@ -1,108 +1,70 @@
-# Library Management System
+# Getting Started with Create React App
 
-A web-based library management system that allows administrators to manage books and users. The system includes features for tracking book borrowing, user management, and importing books from the Open Library database.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features
+## Available Scripts
 
-- User Management
-  - View all users
-  - Activate/deactivate users
-  - View user borrowing history
-  - Search users
+In the project directory, you can run:
 
-- Book Management
-  - Add books manually
-  - Import books from Open Library
-  - Track book status (available/borrowed)
-  - View borrowing history
-  - Search books
+### `npm start`
 
-- Authentication
-  - User login/logout
-  - Role-based access (admin/user)
-  - Session management
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Setup
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-1. Clone this repository:
-```bash
-git clone <repository-url>
-cd library-management-system
-```
+### `npm test`
 
-2. Create a new repository on GitHub:
-   - Go to GitHub.com and create a new repository
-   - Name it "library-management-system" or your preferred name
-   - Make it public
-   - Don't initialize it with any files
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-3. Initialize the local repository and push to GitHub:
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin <your-repository-url>
-git push -u origin main
-```
+### `npm run build`
 
-4. Enable GitHub Pages:
-   - Go to your repository settings
-   - Scroll down to "GitHub Pages" section
-   - Select "main" branch as source
-   - Click Save
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-5. Your site will be available at:
-```
-https://<your-username>.github.io/library-management-system/
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Local Development
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-To run the application locally:
+### `npm run eject`
 
-1. Install a local server (e.g., Live Server in VS Code or Python's HTTP server):
-```bash
-# Using Python 3
-python -m http.server 8000
-```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-2. Open your browser and navigate to:
-```
-http://localhost:8000
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Usage
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-1. Admin Access:
-   - Login with admin credentials
-   - Navigate to the admin dashboard
-   - Manage users and books
-   - Import books from Open Library
-   - Track borrowing history
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-2. User Access:
-   - Login with user credentials
-   - View available books
-   - View borrowing history
+## Learn More
 
-## Technologies Used
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Local Storage for data persistence
-- Open Library API for book imports
-- GitHub Pages for hosting
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Contributing
+### Code Splitting
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-## License
+### Analyzing the Bundle Size
 
-This project is licensed under the MIT License - see the LICENSE file for details
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

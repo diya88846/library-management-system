@@ -147,7 +147,7 @@ function displayBooks(books) {
             </div>
         `;
         bookList.appendChild(bookCard);
-    });
+        });
 }
 
 function addBook() {
@@ -165,22 +165,22 @@ function addBook() {
         return;
     }
 
-    fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, author })
+        fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, author })
     })
     .then(response => response.json())
     .then(() => {
-        loadBooks();
-        document.getElementById("book-title").value = "";
-        document.getElementById("book-author").value = "";
+            loadBooks();
+            document.getElementById("book-title").value = "";
+            document.getElementById("book-author").value = "";
         showNotification('Book added successfully!', 'success');
     })
     .catch(error => {
         console.error('Error adding book:', error);
         showNotification('Error adding book. Please try again.', 'error');
-    });
+        });
 }
 
 function toggleBorrow(id) {

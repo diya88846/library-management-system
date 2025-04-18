@@ -3,12 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management System</title>
-    <script>
-        window.location.replace('login.html');
-    </script>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a19164;
+        }
+
+        .navbar {
+            background-color: #442d03;
+            padding: 1rem;
+            color: #a19164;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-tab {
+            padding: 0.5rem 1rem;
+            background: #867e5b;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .section-tab.active {
+            background: #312404;
+            color: white;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .book-card {
+            background: #eeeade;
+            border: 7px solid #422804;
+            border-radius: 10px;
+            box-shadow: 0 10px 10px rgb(54, 34, 6);
+            padding: 1rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card h3 {
+            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #352b1b;
+        }
+
+        .book-card p {
+            color: #352b1b;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .status-available {
+            background-color: #88a08d;
+            color: #0a2d09;
+        }
+
+        .status-borrowed {
+            background-color: #d3aeb1;
+            color: #30060a;
+        }
+
+        .borrow-btn {
+            background-color: #114c0f;
+            color: #88a08d;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .borrow-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 4px solid #472605;
+            box-shadow: 5px 10px 10px rgb(54, 34, 6);
+            border-radius: 4px;
+        }
+
+        .profile-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .history-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to login page...</p>
+    <nav class="navbar">
+        <h1>📔📑Library Dashboard</h1>
+        <div>
+            <span id="user-name"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="showSection('books')">Available Books</button>
+            <button class="section-tab" onclick="showSection('profile')">My Profile</button>
+            <button class="section-tab" onclick="showSection('history')">My History</button>
+        </div>
+
+        <div id="books-section">
+            <input type="text" class="search-box" id="book-search" placeholder="Search books..." onkeyup="searchBooks()">
+            <div class="books-grid" id="books-grid">
+                <!-- Books will be loaded here -->
+            </div>
+        </div>
+
+        <div id="profile-section" style="display: none;">
+            <div class="profile-section">
+                <h2>My Profile</h2>
+                <p><strong>Username:</strong> <span id="profile-username"></span></p>
+                <p><strong>Role:</strong> <span id="profile-role"></span></p>
+                <p><strong>Status:</strong> <span id="profile-status"></span></p>
+                <p><strong>Currently Borrowed Books:</strong> <span id="current-borrowed"></span></p>
+            </div>
+        </div>
+
+        <div id="history-section" style="display: none;">
+            <div class="profile-section">
+                <h2>Borrowing History</h2>
+                <ul class="history-list" id="history-list">
+                    <!-- History will be loaded here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let books = [];
+        let currentUser = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.replace('login.html');
+                return;
+            }
+
+            // Display user info
+            document.getElementById('user-name').textContent = currentUser.username;
+            document.getElementById('profile-username').textContent = currentUser.username;
+            document.getElementById('profile-role').textContent = currentUser.role;
+            document.getElementById('profile-status').textContent = 'Active';
+
+            // Load books
+            loadBooks();
+            updateProfile();
+        });
+
+        function loadBooks() {
+            books = JSON.parse(localStorage.getItem('books')) || [];
+            displayBooks(books);
+        }
+
+        function displayBooks(booksToDisplay) {
+            const booksGrid = document.getElementById('books-grid');
+            booksGrid.innerHTML = '';
+
+            booksToDisplay.forEach(book => {
+                const isBorrowed = book.status === 'borrowed';
+                const isBorrowedByMe = isBorrowed && book.borrower === currentUser.username;
+
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p>Author: ${book.author}</p>
+                    <p>ISBN: ${book.isbn}</p>
+                    <div class="book-status ${isBorrowed ? 'status-borrowed' : 'status-available'}">
+                        ${isBorrowed ? (isBorrowedByMe ? 'Borrowed by You' : 'Borrowed') : 'Available'}
+                    </div>
+                    <button class="borrow-btn" 
+                        onclick="${isBorrowed ? (isBorrowedByMe ? 'returnBook(\'' + book.isbn + '\')' : '') : 'borrowBook(\'' + book.isbn + '\')'}"
+                        ${isBorrowed && !isBorrowedByMe ? 'disabled' : ''}>
+                        ${isBorrowed ? (isBorrowedByMe ? 'Return Book' : 'Unavailable') : 'Borrow Book'}
+                    </button>
+                `;
+                booksGrid.appendChild(bookCard);
+            });
+        }
+
+        function searchBooks() {
+            const searchTerm = document.getElementById('book-search').value.toLowerCase();
+            const filteredBooks = books.filter(book => 
+                book.title.toLowerCase().includes(searchTerm) ||
+                book.author.toLowerCase().includes(searchTerm) ||
+                book.isbn.toLowerCase().includes(searchTerm)
+            );
+            displayBooks(filteredBooks);
+        }
+
+        function borrowBook(isbn) {
+            const bookIndex = books.findIndex(b => b.isbn === isbn);
+            if (bookIndex !== -1) {
+                const currentDate = new Date().toISOString();
+                books[bookIndex].status = 'borrowed';
+                books[bookIndex].borrower = currentUser.username;
+                books[bookIndex].borrowDate = currentDate;
+                books[bookIndex].history = books[bookIndex].history || [];
+                books[bookIndex].history.push({
+                    action: 'borrowed',
+                    username: currentUser.username,
+                    date: currentDate
+                });
+
+                // Update user's borrowing history
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userIndex = users.findIndex(u => u.username === currentUser.username);
+                users[userIndex].borrowHistory = users[userIndex].borrowHistory || [];
+                users[userIndex].borrowHistory.push({
+                    isbn,
+                    title: books[bookIndex].title,
+                    action: 'borrowed',
+                    date: currentDate
+                });
+
+                localStorage.setItem('books', JSON.stringify(books));
+                localStorage.setItem('users', JSON.stringify(users));
+                loadBooks();
+                updateProfile();
+                alert('Book borrowed successfully!');
+            }
+        }
+
+        function returnBook(isbn) {
+            const bookIndex = books.findIndex(b => b.isbn === isbn);
+            if (bookIndex !== -1) {
+                const currentDate = new Date().toISOString();
+                books[bookIndex].history.push({
+                    action: 'returned',
+                    username: currentUser.username,
+                    date: currentDate
+                });
+
+                // Update user's borrowing history
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userIndex = users.findIndex(u => u.username === currentUser.username);
+                users[userIndex].borrowHistory.push({
+                    isbn,
+                    title: books[bookIndex].title,
+                    action: 'returned',
+                    date: currentDate
+                });
+
+                books[bookIndex].status = 'available';
+                books[bookIndex].borrower = null;
+                books[bookIndex].borrowDate = null;
+
+                localStorage.setItem('books', JSON.stringify(books));
+                localStorage.setItem('users', JSON.stringify(users));
+                loadBooks();
+                updateProfile();
+                alert('Book returned successfully!');
+            }
+        }
+
+        function updateProfile() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === currentUser.username);
+            
+            if (user) {
+                const borrowedBooks = books.filter(b => b.borrower === currentUser.username);
+                document.getElementById('current-borrowed').textContent = borrowedBooks.length;
+                
+                // Update history
+                const historyList = document.getElementById('history-list');
+                historyList.innerHTML = '';
+                
+                if (user.borrowHistory) {
+                    user.borrowHistory.forEach(record => {
+                        const li = document.createElement('li');
+                        li.className = 'history-item';
+                        li.innerHTML = `
+                            <strong>${record.title}</strong><br>
+                            Action: ${record.action}<br>
+                            Date: ${new Date(record.date).toLocaleDateString()}
+                        `;
+                        historyList.appendChild(li);
+                    });
+                }
+            }
+        }
+
+        function showSection(section) {
+            document.getElementById('books-section').style.display = section === 'books' ? 'block' : 'none';
+            document.getElementById('profile-section').style.display = section === 'profile' ? 'block' : 'none';
+            document.getElementById('history-section').style.display = section === 'history' ? 'block' : 'none';
+            
+            // Update active tab
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.textContent.toLowerCase().includes(section));
+            });
+
+            if (section === 'profile' || section === 'history') {
+                updateProfile();
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('currentUser');
+            window.location.replace('login.html');
+        }
+    </script>
 </body>
 </html>
